@@ -79,8 +79,20 @@ jQuery(function($){
 	});
 
 	socket.on('addMessage', function(data){
-		var res = '<h3><img src="'+data.user.avatar+'">'+data.user.id+'</h3>';
+		var res = '<div class="row-fluid message_body">';
+		res += '<div class="span12">';
+		res += '<div class="row-fluid">';
+		res += '<div class="span2">';
+		res += '<img src="'+data.user.avatar+'">';
+		res += '<br>'+data.user.id;
+		res += '</div>';
+		res += '<div class="span10">';
 		res += '<p class="message">'+data.message+'</p>';
+		res += '</div>';
+		res += '</div>';
+		res += '</div>';
+		res += '</div>';
+
 		$salon.prepend(res);
 
 		$('#'+data.user.id+' .is_writting').fadeOut();
