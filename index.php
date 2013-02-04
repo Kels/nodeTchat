@@ -13,7 +13,7 @@
 <body>
 
 	<div class="container">
-		<h1 class="big_title">Tchat avec NodeJS</h1>
+		<h1 class="big_title animated swing">Tchat avec NodeJS</h1>
 		<hr>
 
       </p>
