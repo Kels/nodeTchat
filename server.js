@@ -32,7 +32,7 @@ io.sockets.on('connection', function(socket){
 		me.mail = user.mail;
 		me.avatar = 'https://gravatar.com/avatar/'+md5(me.mail)+'?s=50';
 
-		io.sockets.emit('logged', me);
+		socket.emit('logged', me);
 
 		io.sockets.emit('newUser', me);
 

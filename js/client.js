@@ -5,7 +5,6 @@ jQuery(function($){
 	var username = false;
 
 	var message_template = $('#message_body').html();
-	console.log(message_template);
 	$('#message_body').remove();
 	/**
 	* Gestion des users
@@ -39,19 +38,26 @@ jQuery(function($){
 
 	});
 
-	socket.on('logged', function(user){
-		$salon.prepend('<p class="new_user_notif">' + user.username + ' vient de se connecter</p>');
-	});
-
 	socket.on('newUser', function(user){
 		$('#list_user .loader').remove();
 		$('#list_user ul').append('<li id="' + user.username +'"><img src="'+user.avatar+'"> ' + user.username + ' <span class="is_writting"><i class="icon-pencil"></i></span></li>');
 	});
 
+	socket.on('logged', function(user){
+		$('body').notif({
+			title : 'Nouvel utilisateur',
+			content : user.username+' vient de se connecter.',
+			img : user.avatar,
+		});
+	});
+
 	socket.on('disUser', function(user){
 		$('#'+user.id).remove();
-
-		$salon.prepend('<p class="new_user_notif">' + user.username + ' vient de se déconnecter</p>');
+		$('body').notif({
+			title : "Déconnection d'utilisateur",
+			content : user.username+' vient de se déconnecter.',
+			img : user.avatar,
+		});
 	});
 
 	/**
@@ -125,4 +131,6 @@ jQuery(function($){
 			});
 		}
 	});
+
+	$('.message_body').fadeOut();
 });

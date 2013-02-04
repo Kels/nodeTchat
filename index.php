@@ -5,12 +5,18 @@
 	<title>Mon Tchat</title>
 
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/animate.css">
 	<link rel="stylesheet" type="text/css" href="css/myStyle.css">
+	<link rel="stylesheet" type="text/css" href="css/notifs.css">
 </head>
+
 <body>
+
 	<div class="container">
 		<h1 class="big_title">Tchat avec NodeJS</h1>
 		<hr>
+
+      </p>
 		<div class="row">
 			<div class="span4" id="list_user">
 				<form id="login_form" method="POST">
@@ -83,6 +89,7 @@
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="js/mustache.js"></script>
+	<script type="text/javascript" src="js/jquery.notif.js"></script>
 
 	<script type="text/javascript" src="http://localhost:1337/socket.io/socket.io.js"></script>
 	<script type="text/javascript" src="js/client.js"></script>
