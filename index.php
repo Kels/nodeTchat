@@ -69,6 +69,7 @@
 
 	<script type="text/javascript" src="http://localhost:1337/socket.io/socket.io.js"></script>
 	<script type="text/javascript" src="js/client.js"></script>
+
 </body>
 </html>
 

@@ -1,5 +1,4 @@
 jQuery(function($){
-
 	var socket = io.connect('http://localhost:1337');
 	
 	var $salon = $('#salon');
@@ -43,7 +42,7 @@ jQuery(function($){
 
 	socket.on('newUser', function(user){
 		$('#list_user .loader').remove();
-		$('#list_user ul').append('<li id="' + user.username +'"><img src="'+user.avatar+'">' + user.username + ' <span class="is_writting"><i class="icon-pencil"></i></span></li>');
+		$('#list_user ul').append('<li id="' + user.username +'"><img src="'+user.avatar+'"> ' + user.username + ' <span class="is_writting"><i class="icon-pencil"></i></span></li>');
 	});
 
 	socket.on('disUser', function(user){
