@@ -4,6 +4,9 @@ jQuery(function($){
 	var $salon = $('#salon');
 	var username = false;
 
+	var message_template = $('#message_body').html();
+	console.log(message_template);
+	$('#message_body').remove();
 	/**
 	* Gestion des users
 	*/	
@@ -78,19 +81,7 @@ jQuery(function($){
 	});
 
 	socket.on('addMessage', function(data){
-		var res = '<div class="row-fluid message_body">';
-		res += '<div class="span12">';
-		res += '<div class="row-fluid">';
-		res += '<div class="span2">';
-		res += '<img src="'+data.user.avatar+'">';
-		res += '<br>'+data.user.id;
-		res += '</div>';
-		res += '<div class="span10">';
-		res += '<p class="message">'+data.message+'</p>';
-		res += '</div>';
-		res += '</div>';
-		res += '</div>';
-		res += '</div>';
+		var res = Mustache.render(message_template, {name: data.user.username, avatar : data.user.avatar, message : data.message});
 
 		$salon.prepend(res);
 

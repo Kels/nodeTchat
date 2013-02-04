@@ -38,7 +38,23 @@
 
 			<div class="span8" id="tchat">
 				<h2>Salon</h2>
-				<div id="salon"></div>
+				<div id="salon">
+					<div id="message_body">
+						<div class="row-fluid message_body">
+							<div class="span12">
+								<div class="row-fluid">
+									<div class="span2">
+										<img src="{{avatar}}">
+										<br>{{name}}
+									</div>
+									<div class="span10">
+										<p class="message">{{message}}</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 				<form id="message_form" method="POST">
 					<div class="controls-group">			
 						<label for="message">
@@ -66,6 +82,7 @@
 	</div>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/mustache.js"></script>
 
 	<script type="text/javascript" src="http://localhost:1337/socket.io/socket.io.js"></script>
 	<script type="text/javascript" src="js/client.js"></script>
