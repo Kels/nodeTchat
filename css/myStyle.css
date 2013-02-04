@@ -9,6 +9,10 @@ body{
 	background-image: linear-gradient(#FF8533 20%, #FF6600 30%, #FFF 100%);
 }
 
+.hidden{
+	display: none;
+}
+
 .big_title{
 	color: #FF8533;
 	padding-left: 5px;

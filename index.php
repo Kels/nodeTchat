@@ -13,7 +13,7 @@
 <body>
 
 	<div class="container">
-		<h1 class="big_title animated swing">Tchat avec NodeJS</h1>
+		<h1 class="big_title">Tchat avec NodeJS</h1>
 		<hr>
 
       </p>
@@ -45,7 +45,7 @@
 			<div class="span8" id="tchat">
 				<h2>Salon</h2>
 				<div id="salon">
-					<div id="message_body">
+					<div id="message_body" class="hidden">
 						<div class="row-fluid message_body">
 							<div class="span12">
 								<div class="row-fluid">
