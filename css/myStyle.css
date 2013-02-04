@@ -1,0 +1,129 @@
+body{
+	font-family: verdana;
+	color: #333;
+
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(0.2, #FF8533), color-stop(0.3, #FF6600), to(#FFF));
+	background-image: -webkit-linear-gradient(#FF8533 20%, #FF6600 30%, #FFF 100%);
+	background-image: -moz-linear-gradient(#FF8533 20%, #FF6600 30%, #FFF 100%);
+	background-image: -o-linear-gradient(#FF8533 20%, #FF6600 30%, #FFF 100%);
+	background-image: linear-gradient(#FF8533 20%, #FF6600 30%, #FFF 100%);
+}
+
+.big_title{
+	color: #FF8533;
+	padding-left: 5px;
+	text-shadow: 3px 3px #444;
+}
+
+#login_form{
+	padding: 5px;
+	background-color: #FF8533;
+	width : 295px;
+}
+
+#message_form{
+	background-color: #DDD;
+	display: none;
+	position: fixed;
+	bottom: 55px;
+    width: 610px;
+	padding: 5px;
+	margin: 0;
+}
+
+.new_user_notif{
+	color: green;
+	font-style: italic;
+}
+
+#salon{
+	padding: 5px;
+	overflow: scroll;
+	font-size: 10px;
+	height: 803px;
+	background-color: #EEE;
+}
+
+#salon h3{
+	margin-bottom: 0px; 
+	text-align: left;
+}
+
+.message{
+	padding-left: 10px;
+	margin-top: 0px;
+}
+
+#list_user{
+	padding-left: 5px;
+	margin-right: -5px; 
+}
+
+#list_users{
+	padding: 0px;
+	margin: 0px;
+}
+#list_users li{
+	padding: 5px;
+	list-style: none;
+	margin-bottom: 1px;
+	margin-left: 0px;
+
+background: rgb(249,198,103); /* Old browsers */
+background: -moz-linear-gradient(top,  rgba(249,198,103,1) 0%, rgba(247,150,33,1) 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(249,198,103,1)), color-stop(100%,rgba(247,150,33,1))); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  rgba(249,198,103,1) 0%,rgba(247,150,33,1) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  rgba(249,198,103,1) 0%,rgba(247,150,33,1) 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  rgba(249,198,103,1) 0%,rgba(247,150,33,1) 100%); /* IE10+ */
+background: linear-gradient(to bottom,  rgba(249,198,103,1) 0%,rgba(247,150,33,1) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f9c667', endColorstr='#f79621',GradientType=0 ); /* IE6-9 */
+
+
+	font-weight: bold;
+	color: #333
+}
+
+.is_writting{
+	display: none;
+}
+
+#tchat{
+	-webkit-box-shadow: -5px 5px 5px gray;
+	-moz-box-shadow: -5px 5px 5px gray;
+	box-shadow: -5px 5px 5px gray;
+}
+#tchat h2{
+	text-align: center;
+	background-color: #333;
+	padding: 10px;
+	margin: 0px;
+	color: #222;
+	text-shadow: 0px 0px 4px #666;
+}
+
+footer{
+	position: fixed;
+	bottom: 0px;
+	width: 940px;
+	text-align: center;
+	height: 50px;
+	line-height: 45px;
+	background-color: #FF8533;
+	border-top: 5px solid #FF6600;
+
+	-webkit-box-shadow: 0px 15px 35px #333;
+	-moz-box-shadow: 0px 15px 35px #333;
+	box-shadow: 0px 15px 35px #333;
+}
+
+.container{
+	-webkit-box-shadow: 0px 10px 35px #333;
+	-moz-box-shadow: 0px 10px 35px #333;
+	box-shadow: 0px 10px 35px #333;
+	background-color: #EDEDDD;
+}
+
+.loader{
+	text-align: center;
+}
+
