@@ -20,7 +20,7 @@ jQuery(function($){
 
 	var message_template = $('#message_body').html();
 	$('#message_body').remove();
-	
+
 	/**
 	* Gestion des users
 	*/	
@@ -126,7 +126,7 @@ jQuery(function($){
 	* functionnalités
 	*/
 	socket.on('playBeep', function(){
-		var $beep = $('<audio id="beep" autoplay><source src="audio/beep.mp3" type="audio/mpeg"></audio>');
+		var $beep = $('<audio id="beep" autoplay><source src="audio/beep.mp3" type="audio/mpeg"><source src="audio/beep.wav" type="audio/wav"></audio>');
 		$('#beep').remove();
 		$('#tchat').append($beep);
 	});
