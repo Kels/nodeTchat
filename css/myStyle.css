@@ -33,6 +33,15 @@ body{
     width: 610px;
 	padding: 5px;
 	margin: 0;
+
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(0.2, #DDD), color-stop(0.3, #BBB), to(#333));
+	background-image: -webkit-linear-gradient(#DDD 20%, #BBB 30%, #333 100%);
+	background-image: -moz-linear-gradient(#DDD 20%, #BBB 30%, #333 100%);
+	background-image: -o-linear-gradient(#DDD 20%, #BBB 30%, #333 100%);
+	background-image: linear-gradient(#DDD 20%, #BBB 30%, #333 100%);
+}
+#message_form input{
+	background-color: 
 }
 
 .new_user_notif{
@@ -42,10 +51,9 @@ body{
 
 #salon{
 	padding: 5px;
-	overflow: scroll;
+	overflow: hidden;
 	font-size: 10px;
-	height: 803px;
-	background-color: #EEE;
+	background-color: #DDD;
 }
 
 #salon h3{
@@ -53,8 +61,14 @@ body{
 	text-align: left;
 }
 
+#messages{
+	overflow: auto;
+}
+
 .message_body{
-	border-bottom: 1px dashed #333;
+	border-left: 5px solid #FF8533;
+	padding: 5px;
+	background-color: #EEE;
 	margin-bottom: 10px;
 }
 .message_author{

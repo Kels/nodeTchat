@@ -53,6 +53,7 @@ io.sockets.on('connection', function(socket){
 	*/
 	socket.on('sendMessage', function(message){
 		io.sockets.emit('addMessage', {user: me, message: message});
+		socket.broadcast.emit('playBeep');
 	});
 
 	socket.on('writeMessage', function(){

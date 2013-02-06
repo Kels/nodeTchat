@@ -11,7 +11,6 @@
 </head>
 
 <body>
-
 	<div class="container">
 		<h1 class="big_title">Tchat avec NodeJS</h1>
 		<hr>
@@ -60,11 +59,11 @@
 							</div>
 						</div>
 					</div>
+					<div id="messages"></div>
 				</div>
 				<form id="message_form" method="POST">
 					<div class="controls-group">			
 						<label for="message">
-							Message
 							<a class="btn btn-mini" id="add_equation_btn">Equation</a>
 							<!-- <a class="btn btn-mini" id="short_long_btn">Long message</a> -->
 						</label>

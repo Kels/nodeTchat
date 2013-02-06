@@ -1,11 +1,26 @@
 jQuery(function($){
-	var socket = io.connect('http://localhost:1337');
-	
+	/**
+	* Détecter la hauteur
+	*/
 	var $salon = $('#salon');
+	var $messages = $('#messages');
+
+	resize_windows($salon, $messages);
+
+	$(window).resize(function() {	
+		resize_windows($salon, $messages);
+	});
+
+	/**
+	* Partie client
+	*/
+	var socket = io.connect('http://localhost:1337');
+
 	var username = false;
 
 	var message_template = $('#message_body').html();
 	$('#message_body').remove();
+	
 	/**
 	* Gestion des users
 	*/	
@@ -89,9 +104,14 @@ jQuery(function($){
 	socket.on('addMessage', function(data){
 		var res = Mustache.render(message_template, {name: data.user.username, avatar : data.user.avatar, message : data.message});
 
-		$salon.prepend(res);
+		$messages.append(res);
 
 		$('#'+data.user.id+' .is_writting').fadeOut();
+
+		/**
+		* Scroll vers le bas
+		*/
+		$messages.animate({scrollTop : $messages.prop('scrollHeight') + 74}, 500);
 	});
 
 	socket.on('addWriteNotif', function(user){
@@ -105,6 +125,12 @@ jQuery(function($){
 	/**
 	* functionnalités
 	*/
+	socket.on('playBeep', function(){
+		var $beep = $('<audio id="beep" autoplay><source src="audio/beep.mp3" type="audio/mpeg"></audio>');
+		$('#beep').remove();
+		$('#tchat').append($beep);
+	});
+
 	$('#add_equation_btn').click(function(){
 		$.get('http://webdemo.visionobjects.com/equation.html', function(res){
 			$('#message_form').append(res);
@@ -134,3 +160,35 @@ jQuery(function($){
 
 	$('.message_body').fadeOut();
 });
+
+/**
+* Useful function
+*/
+function resize_windows($salon, $messages){
+			if (document.body && document.body.offsetWidth) {
+		 winW = document.body.offsetWidth;
+		 winH = document.body.offsetHeight;
+		}
+		if (document.compatMode=='CSS1Compat' &&
+		    document.documentElement &&
+		    document.documentElement.offsetWidth ) {
+		 winW = document.documentElement.offsetWidth;
+		 winH = document.documentElement.offsetHeight;
+		}
+		if (window.innerWidth && window.innerHeight) {
+		 winW = window.innerWidth;
+		 winH = window.innerHeight;
+		}
+		winH -= 202;
+
+		$salon.css({
+			'height':winH+'px',
+			'max-height':winH+'px',
+		});		
+
+		winH -= 65;
+		$messages.css({
+			'height':winH+'px',
+			'max-height':winH+'px',
+		});
+}
