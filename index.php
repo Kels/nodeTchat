@@ -12,12 +12,17 @@
 
 <body>
 	<div class="container">
-		<h1 class="big_title">Tchat avec NodeJS</h1>
+		<h1 class="big_title">Bienvenue dans une e-Class</h1>
 		<hr>
 
       </p>
 		<div class="row">
 			<div class="span4" id="list_user">
+				<h4>Utilisateurs connectés</h4>
+				<ul id="list_users">
+					<div class="loader"><img src="img/loader.gif" alt="loading..."></div>
+				</ul>	
+
 				<form id="login_form" method="POST">
 					<div class="controls-group">
 						<label for="username">E-mail</label>
@@ -33,26 +38,20 @@
 						</div>
 					</div>
 				</form>
-
-				<h3>Utilisateurs connectés</h3>
-				<ul id="list_users">
-					<div class="loader"><img src="img/loader.gif" alt="loading..."></div>
-				</ul>		
-
 			</div>
 
 			<div class="span8" id="tchat">
 				<h2>Salon</h2>
 				<div id="salon">
 					<div id="message_body" class="hidden">
-						<div class="row-fluid message_body">
+						<div class="row-fluid message_body" data-author="{{name}}">
 							<div class="span12">
 								<div class="row-fluid">
-									<div class="span2">
+									<div class="message_avatar">
 										<img src="{{avatar}}">
-										<br>{{name}}
 									</div>
-									<div class="span10">
+									<div class="message_text">
+										<h5>{{name}}<small class="pull-right">{{time}}</small></h5>
 										<p class="message">{{message}}</p>
 									</div>
 								</div>
@@ -70,7 +69,7 @@
 						<div class="control">
   							<div class="input-append">
   								<span id="equation_windows"></span>
-								<input name="message" type="text" id="message" class="span6" rows="5">
+								<input name="message" type="text" id="message" class="span6" rows="5" autofocus placeholder="Message ...">
 <!-- 								<textarea name="message" type="text" id="message_d" class="span6" rows="5" style="display:none;"></textarea> -->
 								<input type="submit" value="Envoyer" class="btn">		
 							</div>					
@@ -82,7 +81,7 @@
 
 
 		<footer>
-			2013 &copy; KHub.fr
+			2013 &copy; KHub <span class="pull-right">Contact | Mention légale</span>
 		</footer>
 	</div>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>

@@ -35,6 +35,10 @@ jQuery(function($){
 
 			$notif.addClass('fadeOutRight').delay(3000).slideUp(300, function(){
 				$notif.remove();
+
+				if($notifs.text().length == 0){
+					$notifs.remove();
+				}
 			});
 		});
 	}

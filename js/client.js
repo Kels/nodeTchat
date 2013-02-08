@@ -101,10 +101,37 @@ jQuery(function($){
 		}
 	});
 
-	socket.on('addMessage', function(data){
-		var res = Mustache.render(message_template, {name: data.user.username, avatar : data.user.avatar, message : data.message});
+	socket.on('addMessage', function(data){    
+		var currentTime = new Date()
+	    var hours = currentTime.getHours()
+	    var minutes = currentTime.getMinutes()
+	    var seconds = currentTime.getSeconds()
+	    if (minutes < 10) {
+	        minutes = "0" + minutes
+	    }
+	    if (seconds < 10) {
+	        seconds = "0" + seconds
+	    }
 
-		$messages.append(res);
+	    var str_time = hours+':'+minutes;
+
+		var $last_message = $('.message_body:last');
+		var last_author = $last_message.attr('data-author');
+
+		var res = Mustache.render(message_template, {name: data.user.username, avatar : data.user.avatar, message : data.message, time : str_time});
+
+		if( $last_message.length == 0 ){ 
+			$messages.append(res);
+		}
+		else {
+			if( last_author == data.user.username ){
+				$last_message.find('.message').append('<br>'+data.message);
+			}
+			else{
+				$messages.append(res);
+			}
+		}
+
 
 		$('#'+data.user.id+' .is_writting').fadeOut();
 
@@ -165,30 +192,31 @@ jQuery(function($){
 * Useful function
 */
 function resize_windows($salon, $messages){
-			if (document.body && document.body.offsetWidth) {
-		 winW = document.body.offsetWidth;
-		 winH = document.body.offsetHeight;
-		}
-		if (document.compatMode=='CSS1Compat' &&
-		    document.documentElement &&
-		    document.documentElement.offsetWidth ) {
-		 winW = document.documentElement.offsetWidth;
-		 winH = document.documentElement.offsetHeight;
-		}
-		if (window.innerWidth && window.innerHeight) {
-		 winW = window.innerWidth;
-		 winH = window.innerHeight;
-		}
-		winH -= 202;
+	if (document.body && document.body.offsetWidth) {
+		winW = document.body.offsetWidth;
+		winH = document.body.offsetHeight;
+	}
+	if (document.compatMode=='CSS1Compat' &&
+	    document.documentElement &&
+	    document.documentElement.offsetWidth ) {
+		winW = document.documentElement.offsetWidth;
+		winH = document.documentElement.offsetHeight;
+	}
+	if (window.innerWidth && window.innerHeight) {
+		winW = window.innerWidth;
+		winH = window.innerHeight;
+	}
+	
+	winH -= 202;
 
-		$salon.css({
-			'height':winH+'px',
-			'max-height':winH+'px',
-		});		
+	$salon.css({
+		'height':winH+'px',
+		'max-height':winH+'px',
+	});		
 
-		winH -= 65;
-		$messages.css({
-			'height':winH+'px',
-			'max-height':winH+'px',
-		});
+	winH -= 64;
+	$messages.css({
+		'height':winH+'px',
+		'max-height':winH+'px',
+	});
 }
