@@ -86,6 +86,11 @@ jQuery(function($){
 		var message = $message.val();
 
 		if( message ){
+			/**
+			* Parse message
+			*/
+			message = message.split('[eq]').join('\\(').split('[/eq]').join('\\)');
+
 			socket.emit('sendMessage', message);
 			$message.val('');
 			$message.focus();
@@ -125,7 +130,7 @@ jQuery(function($){
 		}
 		else {
 			if( last_author == data.user.username ){
-				$last_message.find('.message').append('<br>'+data.message);
+				$last_message.find('.message:last').after('<p class="message">'+data.message+'</p>');
 			}
 			else{
 				$messages.append(res);
@@ -133,8 +138,12 @@ jQuery(function($){
 		}
 
 
-		$('#'+data.user.id+' .is_writting').fadeOut();
+		$('#'+data.user.id+' .is_writting').fadeOut().parent().removeClass('isWritting');
 
+		/**
+		* MathJax render
+		*/
+        MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
 		/**
 		* Scroll vers le bas
 		*/
@@ -142,11 +151,11 @@ jQuery(function($){
 	});
 
 	socket.on('addWriteNotif', function(user){
-		$('#'+user.id+' .is_writting').fadeIn();
+		$('#'+user.id+' .is_writting').fadeIn().parent().addClass('isWritting');
 	});
 
 	socket.on('removeWriteNotif', function(user){
-		$('#'+user.id+' .is_writting').fadeOut();
+		$('#'+user.id+' .is_writting').fadeOut().parent().removeClass('isWritting');
 	});
 
 	/**
@@ -156,12 +165,6 @@ jQuery(function($){
 		var $beep = $('<audio id="beep" autoplay><source src="audio/beep.mp3" type="audio/mpeg"><source src="audio/beep.wav" type="audio/wav"></audio>');
 		$('#beep').remove();
 		$('#tchat').append($beep);
-	});
-
-	$('#add_equation_btn').click(function(){
-		$.get('http://webdemo.visionobjects.com/equation.html', function(res){
-			$('#message_form').append(res);
-		});
 	});
 
 	$('#short_long_btn').click(function(){
@@ -185,7 +188,11 @@ jQuery(function($){
 		}
 	});
 
-	$('.message_body').fadeOut();
+	$('#add_equation_btn').click(function(){
+		// $('#message').val( $('#message').val()+' [eq]  [/eq]' );
+		$(this).equation({dest : '#message'});
+	});
+
 });
 
 /**

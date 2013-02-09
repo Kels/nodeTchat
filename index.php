@@ -60,38 +60,38 @@
 					</div>
 					<div id="messages"></div>
 				</div>
-				<form id="message_form" method="POST">
-					<div class="controls-group">			
-						<label for="message">
-							<a class="btn btn-mini" id="add_equation_btn">Equation</a>
-							<!-- <a class="btn btn-mini" id="short_long_btn">Long message</a> -->
-						</label>
-						<div class="control">
-  							<div class="input-append">
-  								<span id="equation_windows"></span>
-								<input name="message" type="text" id="message" class="span6" rows="5" autofocus placeholder="Message ...">
+
+				<form id="message_form" class="form-inline" method="POST">
+					<p>
+						<a class="btn btn-mini" id="add_equation_btn">Equation</a>
+					</p>
+					<input name="message" type="text" id="message" class="span6" rows="5" autofocus placeholder="Message ...">
 <!-- 								<textarea name="message" type="text" id="message_d" class="span6" rows="5" style="display:none;"></textarea> -->
-								<input type="submit" value="Envoyer" class="btn">		
-							</div>					
-						</div>
-					</div>
+					<input type="submit" value="Envoyer" class="btn">		
 				</form>
 			</div>
 		</div>
 
 
 		<footer>
-			2013 &copy; KHub <span class="pull-right">Contact | Mention légale</span>
+			2013 &copy; KHub <span class="pull-right"><a href="math.html">Contact</a> | Mention légale</span>
 		</footer>
 	</div>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="js/mustache.js"></script>
 	<script type="text/javascript" src="js/jquery.notif.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML-full"></script>
+	<script type="text/javascript" src="js/jquery.equation.js"></script>
 
 	<script type="text/javascript" src="http://localhost:1337/socket.io/socket.io.js"></script>
 	<script type="text/javascript" src="js/client.js"></script>
-
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  "HTML-CSS": { linebreaks: { automatic: true } },
+         SVG: { linebreaks: { automatic: true } }
+});
+</script>
 </body>
 </html>
 
