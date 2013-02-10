@@ -1,9 +1,8 @@
 var http = require('http');
 var md5 = require('MD5');
 
-var test = md5("mssage");
 httpServer = http.createServer(function(req, res){
-	console.log('Lol');
+	console.log('Init Node Server');
 });
 
 httpServer.listen(1337);
@@ -63,4 +62,15 @@ io.sockets.on('connection', function(socket){
 	socket.on('resetMessage', function(){
 		socket.broadcast.emit('removeWriteNotif', me);
 	});
+
+	/**
+	* Tableau
+	*/
+	socket.on('initSheet', function(){
+		socket.broadcast.emit('initSheet');
+	});
+
+	socket.on('drawPoint', function(points){
+		socket.broadcast.emit('drawPoint', points);
+	})
 });
