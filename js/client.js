@@ -104,7 +104,7 @@ jQuery(function($){
 
 		$message.keyup(function(){
 			if($message.val()){
-				socket.emit('writeMessage');
+				if($message.val().length ==1) socket.emit('writeMessage');
 			}
 			else{
 				socket.emit('resetMessage');
