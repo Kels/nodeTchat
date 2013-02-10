@@ -70,7 +70,15 @@ io.sockets.on('connection', function(socket){
 		socket.broadcast.emit('initSheet');
 	});
 
-	socket.on('drawPoint', function(points){
-		socket.broadcast.emit('drawPoint', points);
-	})
+	socket.on('initPath', function(){
+		socket.broadcast.emit('initPath');
+	});
+	socket.on('endPath', function(){
+		socket.broadcast.emit('endPath');
+	});
+
+	socket.on('drawPoint', function(point){
+		socket.broadcast.emit('drawPoint', point);
+	});
+
 });

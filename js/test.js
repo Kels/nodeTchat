@@ -1,62 +1,67 @@
+jQuery(function($){    
+    $.post('getServer.php', {req : '453194de17c7a4b28727cfb98f1ab8c3'}, function(res){
+        var socket = io.connect('http://'+res.server+':1337');
 
-    var socket = io.connect('http://localhost:1337');
-
-        paper.setup('myCanvas');
+//        paper.setup('myCanvas');
         // Create a simple drawing tool:
         var tool = new Tool();
         var path;
         var color = 'black';
         var points = [];
 
-        path = new Path();
+//        path = new Path();
         
         // Define a mousedown and mousedrag handler
         tool.onMouseDown = function(event) {
             path = new Path();
             path.strokeColor = color;
             path.add(event.point);
+
+            socket.emit('initPath');
         }
 
         tool.onMouseDrag = function(event) {
             path.add(event.point);
+            socket.emit('drawPoint', event.point);
             points.push(event.point);
         }
 
         tool.onMouseUp = function(e){
-            var pathBuffer = path.simplify(50);
-            socket.emit('drawPoint', points);
+            path.simplify(10);
+            //socket.emit('drawPoint', points);
             points = [];
+
+            socket.emit('endPath');
         }
 
-        tool1 = new Tool();
-        tool1.onMouseDown = onMouseDown;
+        $('#refresh_sheet_btn').click(function(){
+            for(var i in project.activeLayer.children){
+                var t_path = project.activeLayer.children[i];
+                t_path.remove();
+            }
 
-        tool1.onMouseDrag = function(event) {
-            path.add(event.point);
-        }
+            if(project.activeLayer.children.length > 0) $('#refresh_sheet_btn').trigger('click');
+        });
 
-        tool2 = new Tool();
-        tool2.minDistance = 20;
-        tool2.onMouseDown = onMouseDown;
+        var broadcastedPath;
+        socket.on('initPath', function(){
+            broadcastedPath = new Path();
+        });
+        socket.on('endPath', function(){
+            broadcastedPath.simplify(10);    
+        });
 
-        tool2.onMouseDrag = function(event) {
-            // Use the arcTo command to draw cloudy lines
-            path.arcTo(event.point);
-        }
+        socket.on('drawPoint', function(point){
+            broadcastedPath.strokeColor = 'blue';
+
+            broadcastedPath.add(point);
+            // for (var i = points.length - 1; i >= 0; i--) {
+            //     var point = new Point(points[i]);
+            //     path.add(point);
+            // };
+        });
 
 
 
-jQuery(function($){
-
-    socket.on('drawPoint', function(points){
-        path = new Path();
-        path.strokeColor = color;
-        
-        for (var i = points.length - 1; i >= 0; i--) {
-            var point = new Point(points[i]);
-            path.add(point);
-        };
-        path.simplify(50);    
-    });
-
+    }, 'json');
 });

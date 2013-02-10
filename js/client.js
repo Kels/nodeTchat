@@ -4,7 +4,7 @@ jQuery(function($){
 	*/
 	
 	$.post('getServer.php', {req : '453194de17c7a4b28727cfb98f1ab8c3'}, function(res){
-		var socket = io.connect(res.server+':1337');
+		var socket = io.connect('http://'+res.server+':1337');
 
 		/**
 		* Détecter la hauteur
@@ -168,23 +168,27 @@ jQuery(function($){
 		/**
 		* Tableau magique
 		*/	
-	    var $sheet = $('#drawSheet');
+	    var $magicalBoard = $('#magicalBoard');
+	    $('#magicalBoardToolBar').hover(function(){
+	    	$magicalBoard.draggable();
+	    }, function(){
+	    	$magicalBoard.draggable('destroy');
+	    });
 
 		$('#draw_btn').click(function(){
-			$sheet.fadeIn();
+			$magicalBoard.fadeIn();
 			$('canvas').attr('width', 618+'px').attr('height', 500+'px');
 
 			socket.emit('initSheet');
 		});
 
-
-	    $sheet.find('i').click(function(){
+	    $('#close_sheet_btn').click(function(){
 			$('canvas').attr('width', 0+'px').attr('height', 0+'px');
-	        $sheet.fadeOut();
+	        $magicalBoard.fadeOut();
 	    });
 
 		socket.on('initSheet', function(){
-			$('#drawSheet').fadeIn();
+			$magicalBoard.fadeIn();
 			$('canvas').attr('width', 618+'px').attr('height', 500+'px');
 		});
 

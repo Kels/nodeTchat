@@ -42,10 +42,16 @@
 
 			<div class="span8" id="tchat">
 				<h2>Salon</h2>
-				<div id="drawSheet">
-					<canvas id="myCanvas" resize></canvas>
-					<i class="icon-remove"></i>
 
+				<div id="magicalBoard">
+					<div id="magicalBoardToolBar">
+						<a href="#" id="close_sheet_btn" class="pull-right"><i class="icon-remove icon-white"></i></a>
+						<a href="#" id="refresh_sheet_btn"><i class="icon-refresh icon-white"></i></a>
+					</div>
+					
+					<div id="drawSheet">
+						<canvas id="myCanvas" resize></canvas>
+					</div>
 				</div>
 				<div id="salon">
 					<div id="message_body" class="hidden">
@@ -85,7 +91,9 @@
 		</footer>
 	</div>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+	<script type="text/javascript" src="http://<?php echo $_SERVER['HTTP_HOST'] ?>:1337/socket.io/socket.io.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="js/mustache.js"></script>
 	<script type="text/javascript" src="js/jquery.notif.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML-full"></script>
@@ -95,7 +103,6 @@
 
 	<script type="text/javascript" src="js/jquery.draw.js"></script>
 
-	<script type="text/javascript" src="http://<?php echo $_SERVER['HTTP_HOST'] ?>:1337/socket.io/socket.io.js"></script>
 	<script type="text/javascript" src="js/client.js"></script>
 
 	<script type="text/paperscript" canvas="myCanvas" src="js/test.js">
