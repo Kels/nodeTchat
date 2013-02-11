@@ -177,19 +177,17 @@ jQuery(function($){
 
 		$('#draw_btn').click(function(){
 			$magicalBoard.fadeIn();
-			$('canvas').attr('width', 618+'px').attr('height', 500+'px');
+//			$('canvas').attr('width', 618+'px').attr('height', 500+'px');
 
 			socket.emit('initSheet');
 		});
 
 	    $('#close_sheet_btn').click(function(){
-			$('canvas').attr('width', 0+'px').attr('height', 0+'px');
 	        $magicalBoard.fadeOut();
 	    });
 
 		socket.on('initSheet', function(){
 			$magicalBoard.fadeIn();
-			$('canvas').attr('width', 618+'px').attr('height', 500+'px');
 		});
 
 

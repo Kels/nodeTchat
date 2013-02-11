@@ -70,15 +70,18 @@ io.sockets.on('connection', function(socket){
 		socket.broadcast.emit('initSheet');
 	});
 
-	socket.on('initPath', function(){
-		socket.broadcast.emit('initPath');
+	socket.on('initPath', function(data){
+		socket.broadcast.emit('initPath', data);
 	});
 	socket.on('endPath', function(){
 		socket.broadcast.emit('endPath');
 	});
 
-	socket.on('drawPoint', function(point){
-		socket.broadcast.emit('drawPoint', point);
+	socket.on('drawPoint', function(data){
+		socket.broadcast.emit('drawPoint', data);
 	});
 
+	socket.on('drawRectangle', function(data){
+		socket.broadcast.emit('drawRectangle', data);
+	})
 });

@@ -11,6 +11,27 @@
 </head>
 
 <body>
+	<div id="magicalBoard">
+		<div id="magicalBoardToolBar">
+			<a href="#" id="close_sheet_btn" class="pull-right"><i class="icon-remove icon-white"></i></a>
+			<a href="#" id="refresh_sheet_btn"><i class="icon-refresh icon-white"></i></a>
+			<a href="#" id="pencilToolBar"><i class="icon-pencil icon-white"></i></a>
+			<a href="#" id="selectToolBar"><i class="icon-edit icon-white"></i></a>
+			<a href="#" id="removeToolBar"><i class="icon-remove-sign icon-white"></i></a>
+			<a href="#" id="rectangleToolBar">Rect</a>
+		</div>
+		<div id="favoriteColor">
+			<div class="color1"></div>
+			<div class="color2"></div>
+			<div class="color3"></div>
+			<div class="color4"></div>
+		</div>
+					
+		<div id="drawSheet">
+			<canvas id="myCanvas" width="618px" height="500px" ></canvas>
+		</div>
+	</div>
+
 	<div class="container">
 		<h1 class="big_title">Bienvenue dans une e-Class</h1>
 		<hr>
@@ -43,16 +64,7 @@
 			<div class="span8" id="tchat">
 				<h2>Salon</h2>
 
-				<div id="magicalBoard">
-					<div id="magicalBoardToolBar">
-						<a href="#" id="close_sheet_btn" class="pull-right"><i class="icon-remove icon-white"></i></a>
-						<a href="#" id="refresh_sheet_btn"><i class="icon-refresh icon-white"></i></a>
-					</div>
-					
-					<div id="drawSheet">
-						<canvas id="myCanvas" resize></canvas>
-					</div>
-				</div>
+				
 				<div id="salon">
 					<div id="message_body" class="hidden">
 						<div class="row-fluid message_body" data-author="{{name}}">
@@ -76,8 +88,6 @@
 					<p>
 						<a class="btn btn-mini" id="add_equation_btn">Equation</a>
 						<a class="btn btn-mini" id="draw_btn">Draw</a>					    
-<!-- 						<a onclick="javascript:tool1.activate();">Lines</a>
-    					<a onclick="javascript:tool2.activate();">Clouds</a> -->
 					</p>
 					<input name="message" type="text" id="message" class="span6" rows="5" autofocus placeholder="Message ...">
 <!-- 								<textarea name="message" type="text" id="message_d" class="span6" rows="5" style="display:none;"></textarea> -->
