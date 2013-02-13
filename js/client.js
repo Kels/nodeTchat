@@ -128,6 +128,9 @@ jQuery(function($){
 			var $last_message = $('.message_body:last');
 			var last_author = $last_message.attr('data-author');
 
+			/**
+			* Injection de données dans le template
+			*/
 			var res = Mustache.render(message_template, {name: data.user.username, avatar : data.user.avatar, message : data.message, time : str_time});
 
 			if( $last_message.length == 0 ){ 
@@ -142,13 +145,13 @@ jQuery(function($){
 				}
 			}
 
-
 			$('#'+data.user.id+' .is_writting').fadeOut().parent().removeClass('isWritting');
 
 			/**
 			* MathJax render
 			*/
 	        MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+
 			/**
 			* Scroll vers le bas
 			*/
@@ -169,15 +172,15 @@ jQuery(function($){
 		* Tableau magique
 		*/	
 	    var $magicalBoard = $('#magicalBoard');
-	    $('#magicalBoardToolBar').hover(function(){
+	    $('#magicalBoardToolBar').mousedown(function(){
 	    	$magicalBoard.draggable();
-	    }, function(){
+	    }).mouseup(function(){
 	    	$magicalBoard.draggable('destroy');
 	    });
 
 		$('#draw_btn').click(function(){
 			$magicalBoard.fadeIn();
-//			$('canvas').attr('width', 618+'px').attr('height', 500+'px');
+			$('#trait').trigger('click');
 
 			socket.emit('initSheet');
 		});
@@ -190,41 +193,19 @@ jQuery(function($){
 			$magicalBoard.fadeIn();
 		});
 
-
 		/**
 		* functionnalités
 		*/
 		socket.on('playBeep', function(){
 			var $beep = $('<audio id="beep" autoplay><source src="audio/beep.mp3" type="audio/mpeg"><source src="audio/beep.wav" type="audio/wav"></audio>');
-			$('#beep').remove();
+			if($('#beep')) $('#beep').remove();
 			$('#tchat').append($beep);
 		});
 
-		$('#short_long_btn').click(function(){
-			var txt = $(this).text();
-
-			if(txt == 'Long message'){
-				$(this).text('Short message');
-
-				$('input[name="message"]').fadeOut(function(){
-					$(this).attr('id', 'message_d');
-					$('textarea[name="message"]').fadeIn().attr('id', 'message');
-				});
-			}
-			else{
-				$(this).text('Long message');
-
-				$('textarea[name="message"]').fadeOut(function(){
-					$(this).attr('id', 'message_d');
-					$('input[name="message"]').fadeIn().attr('id', 'message');
-				});
-			}
-		});
-
 		$('#add_equation_btn').click(function(){
-			// $('#message').val( $('#message').val()+' [eq]  [/eq]' );
 			$(this).equation({dest : '#message'});
 		});
+
 	}, 'json');
 });
 
@@ -232,6 +213,10 @@ jQuery(function($){
 * Useful function
 */
 function resize_windows($salon, $messages){
+	var footer = $('footer').height();
+	var $salon = $('#messages');
+	var $message_form = $('#message_form');
+
 	if (document.body && document.body.offsetWidth) {
 		winW = document.body.offsetWidth;
 		winH = document.body.offsetHeight;
@@ -247,16 +232,19 @@ function resize_windows($salon, $messages){
 		winH = window.innerHeight;
 	}
 	
-	winH -= 202;
+	$('.container').css({
+		'height': winH+'px'
+	});
 
 	$salon.css({
 		'height':winH+'px',
 		'max-height':winH+'px',
 	});		
 
-	winH -= 64;
+	messagesH = winH - ( $message_form.height() + footer + $('#tchat').position().top +$('#salon').position().top - 18 );
+
 	$messages.css({
-		'height':winH+'px',
-		'max-height':winH+'px',
+		'height':messagesH+'px',
+		'max-height':messagesH+'px',
 	});
 }

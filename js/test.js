@@ -8,6 +8,7 @@ jQuery(function($){
         var select = new Tool();
         var remove = new Tool();
         var rectangle = new Tool();
+        var segment = new Tool();
         var path;
         var color = 'black';
         var points = [];
@@ -18,25 +19,53 @@ jQuery(function($){
         pencil.onMouseDown = function(event) {
             path = new Path();
             path.strokeColor = color;
-            path.add(event.point);
+            path.add(event.point, event.point);
 
             socket.emit('initPath', {
                 color : color,
+                point : event.point,
             });
         }
 
-        pencil.onMouseDrag = function(event) {
-            path.add(event.point);
-            socket.emit('drawPoint', event.point);
-            points.push(event.point);
+        pencil.onMouseDrag = function(event) {    
+            if(event.modifiers.shift) {
+                path.lastSegment.point = event.point;
+            } else {
+                path.add(event.point);
+                socket.emit('drawPoint', event.point);
+            }
         }
 
-        pencil.onMouseUp = function(e){
-            path.simplify(10);
-            //socket.emit('drawPoint', points);
-            points = [];
+        pencil.onMouseUp = function(event){
+            if(event.modifiers.shift){
+                socket.emit('drawSegment', event.point);
+            }
+            else{
+                path.simplify(10);
+                socket.emit('endPath');
+            }
+        }
 
-            socket.emit('endPath');
+        /**
+        * Segment Tool
+        */
+        segment.onMouseDown = function(event) {
+            path = new Path();
+            path.strokeColor = color;
+            path.add(event.point, event.point);
+
+            socket.emit('initPath', {
+                color : color,
+                point : event.point,
+            });
+        }
+
+        segment.onMouseDrag = function(event) {    
+            path.lastSegment.point = event.point;
+        }
+
+        segment.onMouseUp = function(event){
+            socket.emit('drawSegment', event.point);    
         }
 
         /**
@@ -65,11 +94,16 @@ jQuery(function($){
         }
 
         rectangle.onMouseUp = function(e){
-            pathRectTmp.remove();
+            if(pathRectTmp) pathRectTmp.remove();
             path = new Path.Rectangle(rect);
             path.strokeColor = color;
 
             socket.emit('drawRectangle', {topLeft : rectTopLeft, size : rectSize, color : color});
+
+            rectSize = false;
+            rectTopLeft = false;
+            rect = false;
+            path = false;
         }
 
         /**
@@ -116,6 +150,10 @@ jQuery(function($){
             if(pathToRemove) pathToRemove.remove();
         }
 
+        remove.onMouseUp = function(e){
+            pathToRemove = false;
+        }
+
         /**
         * Manage ToolBar
         */
@@ -124,10 +162,36 @@ jQuery(function($){
             $(this).css('opacity', 1).siblings().css('opacity', 0.6);
         }); 
 
+
+
         $('#rectangleToolBar').click(function(){
             rectangle.activate();
             $(this).css('opacity', 1).siblings().css('opacity', 0.6);
         });  
+        
+        /**
+        * Actions cmenu
+        */
+        $(document).on('click', '#trait', function(){
+            pencil.activate();
+        });
+        $(document).on('click', '#rectangle', function(){
+            rectangle.activate();
+        });        
+        $(document).on('click', '#segment', function(){
+            segment.activate();
+        });
+        $(document).on('click', '#gomme', function(){
+            remove.activate();
+        });
+        $(document).on('click', '#effacer', function(){
+            for(var i in project.activeLayer.children){
+                var t_path = project.activeLayer.children[i];
+                t_path.remove();
+            }
+
+            if(project.activeLayer.children.length > 0) $('#effacer').trigger('click');
+        });
 
         $('#selectToolBar').click(function(){
             select.activate();
@@ -164,7 +228,9 @@ jQuery(function($){
             broadcastedPath = new Path();
 
             broadcastedPath.strokeColor = data.color;
+            broadcastedPath.add(data.point, data.point);
         });
+
         socket.on('endPath', function(){
             broadcastedPath.simplify(10);    
         });
@@ -177,11 +243,39 @@ jQuery(function($){
             // };
         });
 
+        socket.on('drawSegment', function(lastPoint){
+            broadcastedPath.lastSegment.point = lastPoint;
+        });
+
         socket.on('drawRectangle', function(data){
             var broadcastedRect = new Rectangle( data.topLeft, data.size);
             broadcastedPath = new Path.Rectangle(broadcastedRect);
             broadcastedPath.strokeColor = data.color;
-        })
+        });
+
+        $('#myCanvas').cmenu({
+            '1' : {
+                'label' : 'Trait',
+                'id' : 'trait'  
+            },
+            '2' : {
+                'label' : 'Segment',
+                'id' : 'segment'
+            },
+            '3' : {
+                'label' : 'Rectangle',
+                'id' : 'rectangle'
+            },
+            '4' : {
+                'label' : 'Gomme',
+                'id' : 'gomme'
+            },
+            '5' : {
+                'label' : 'Effacer',
+                'id' : 'effacer',
+                'separated' : true
+            },
+        });
 
     }, 'json');
 });

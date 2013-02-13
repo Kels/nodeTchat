@@ -11,29 +11,8 @@
 </head>
 
 <body>
-	<div id="magicalBoard">
-		<div id="magicalBoardToolBar">
-			<a href="#" id="close_sheet_btn" class="pull-right"><i class="icon-remove icon-white"></i></a>
-			<a href="#" id="refresh_sheet_btn"><i class="icon-refresh icon-white"></i></a>
-			<a href="#" id="pencilToolBar"><i class="icon-pencil icon-white"></i></a>
-			<a href="#" id="selectToolBar"><i class="icon-edit icon-white"></i></a>
-			<a href="#" id="removeToolBar"><i class="icon-remove-sign icon-white"></i></a>
-			<a href="#" id="rectangleToolBar">Rect</a>
-		</div>
-		<div id="favoriteColor">
-			<div class="color1"></div>
-			<div class="color2"></div>
-			<div class="color3"></div>
-			<div class="color4"></div>
-		</div>
-					
-		<div id="drawSheet">
-			<canvas id="myCanvas" width="618px" height="500px" ></canvas>
-		</div>
-	</div>
-
 	<div class="container">
-		<h1 class="big_title">Bienvenue dans une e-Class</h1>
+		<h1 class="big_title"></h1>
 		<hr>
 
       </p>
@@ -62,11 +41,11 @@
 			</div>
 
 			<div class="span8" id="tchat">
-				<h2>Salon</h2>
+				<h2 id="topic">Salon</h2>
 
 				
 				<div id="salon">
-					<div id="message_body" class="hidden">
+					<template id="message_body" class="hidden">
 						<div class="row-fluid message_body" data-author="{{name}}">
 							<div class="span12">
 								<div class="row-fluid">
@@ -80,7 +59,7 @@
 								</div>
 							</div>
 						</div>
-					</div>
+					</template>
 					<div id="messages"></div>
 				</div>
 
@@ -97,7 +76,8 @@
 		</div>
 
 		<footer>
-			2013 &copy; KHub <span class="pull-right"><a href="math.html">Contact</a> | Mention légale</span>
+			2013 &copy; KHub <span class="pull-right">
+			Contact | Mention légale</span>
 		</footer>
 	</div>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
@@ -112,12 +92,9 @@
 	<script type="text/javascript" src="js/paper.js"></script>
 
 	<script type="text/javascript" src="js/jquery.draw.js"></script>
+	<script type="text/javascript" src="js/jquery.cmenu.js"></script>
 
 	<script type="text/javascript" src="js/client.js"></script>
-
-	<script type="text/paperscript" canvas="myCanvas" src="js/test.js">
-	</script>
-
 
 	<script type="text/x-mathjax-config">
 		MathJax.Hub.Config({
@@ -125,6 +102,28 @@
 		         "SVG": { linebreaks: { automatic: true } }
 		});
 	</script>
+
+	<div id="magicalBoard">
+			<div id="magicalBoardToolBar">
+				<a href="#" id="close_sheet_btn" class="pull-right"><i class="icon-remove icon-white"></i></a>
+				<!-- <a href="#" id="refresh_sheet_btn"><i class="icon-refresh icon-white"></i></a>
+				<a href="#" id="pencilToolBar"><i class="icon-pencil icon-white"></i></a>
+				<a href="#" id="selectToolBar"><i class="icon-edit icon-white"></i></a>
+				<a href="#" id="removeToolBar"><i class="icon-remove-sign icon-white"></i></a>
+				<a href="#" id="rectangleToolBar">Rect</a> -->
+			</div>
+			<div id="favoriteColor">
+				<div class="color1"></div>
+				<div class="color2"></div>
+				<div class="color3"></div>
+				<div class="color4"></div>
+			</div>
+						
+			<script type="text/paperscript" canvas="myCanvas" src="js/test.js" data-paper-loaded="true"></script>
+			<div id="drawSheet">
+				<canvas id="myCanvas" width="618px" height="500px" ></canvas>
+			</div>
+		</div>
 </body>
 </html>
 

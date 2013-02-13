@@ -81,7 +81,11 @@ io.sockets.on('connection', function(socket){
 		socket.broadcast.emit('drawPoint', data);
 	});
 
+	socket.on('drawSegment', function(data){
+		socket.broadcast.emit('drawSegment', data);
+	});
+
 	socket.on('drawRectangle', function(data){
 		socket.broadcast.emit('drawRectangle', data);
-	})
+	});
 });

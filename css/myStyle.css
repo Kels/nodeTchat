@@ -48,13 +48,15 @@ body{
 	background: -ms-linear-gradient(top,  rgba(249,198,103,1) 0%,rgba(247,150,33,1) 100%); /* IE10+ */
 	background: linear-gradient(to bottom,  rgba(249,198,103,1) 0%,rgba(247,150,33,1) 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f9c667', endColorstr='#f79621',GradientType=0 ); /* IE6-9 */
+
+	z-index: 10;
 }
 
 #message_form{
 	background-color: #DDD;
 	display: none;
-	position: fixed;
-	bottom: 55px;
+	position: relative;
+	bottom: 0px;
     width: 610px;
 	padding: 5px;
 	margin: 0;
@@ -68,8 +70,6 @@ body{
 	background-image: -moz-linear-gradient(#DDD 20%, #BBB 30%, #333 100%);
 	background-image: -o-linear-gradient(#DDD 20%, #BBB 30%, #333 100%);
 	background-image: linear-gradient(#DDD 20%, #BBB 30%, #333 100%);
-
-	z-index: 2000;
 }
 #message_form input{
 	background-color: 
@@ -84,6 +84,7 @@ body{
 	padding: 5px;
 	overflow: hidden;
 	background-color: #DDD;
+	position: relative;
 }
 
 #tchat{
@@ -104,7 +105,8 @@ body{
 
 
 #messages{
-	overflow: auto;
+	overflow-y: scroll;
+	overflow-x: hidden; 
 }
 
 .message_body{
